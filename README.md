@@ -13,14 +13,14 @@
 
 ## Параметры аннотации `@SpringBootApplication`:
 
-|   | Параметр                 | Описание                                                                                                                                                      |
-|---|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1 | `exclude`                | Позволяет исключить определенные классы конфигурации из автоматической настройки. Принимает массив классов.                                                   |
-| 2 | `excludeName`            | Исключает классы по их полным именам (в виде строки), что удобно при работе с динамическими конфигурациями.                                                   |
-| 3 | `scanBasePackages`       | Определяет список пакетов, которые необходимо сканировать для поиска компонентов. Полезно, если бины находятся за пределами стандартного корневого пакета.    |
-| 4 | `scanBasePackageClasses` | Позволяет задать классы, из пакетов которых Spring будет начинать сканирование компонентов. Используется, если нужно указать конкретные точки входа в пакеты. |
-| 5 | `nameGenerator`          | Класс `BeanNameGenerator`, используемый для именования компонентов.                                                                                           |
-| 6 | `proxyBeanMethods`       | Включает (`true`) или отключает (`false`) проксирование бином, что влияет на их создание и вызов методов внутри конфигурационного класса.                     |
+|   | Параметр                 | Описание                                                                                                                                                                                                                                                 |
+|---|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1 | `exclude`                | Позволяет исключить определенные классы конфигурации из автоматической настройки. Принимает массив классов.                                                                                                                                              |
+| 2 | `excludeName`            | Исключает классы по их полным именам (в виде строки), что удобно при работе с динамическими конфигурациями.                                                                                                                                              |
+| 3 | `scanBasePackages`       | Определяет список пакетов, которые необходимо сканировать для поиска компонентов. Полезно, если бины находятся за пределами стандартного корневого пакета.                                                                                               |
+| 4 | `scanBasePackageClasses` | Позволяет задать классы, из пакетов которых Spring будет начинать сканирование компонентов. Используется, если нужно указать конкретные точки входа в пакеты.                                                                                            |
+| 5 | `nameGenerator`          | Класс `BeanNameGenerator`, используемый для именования компонентов.                                                                                                                                                                                      |
+| 6 | `proxyBeanMethods`       | Включает (true) или отключает (false) проксирование методов внутри конфигурационного класса (@Configuration). При false Spring не создает прокси-объект, что ускоряет загрузку контекста, но запрещает вызов методов-конфигураций внутри того же класса. |
 
 ### Примеры:
 
@@ -46,6 +46,16 @@ public class Application {
 
 #### 3. `scanBasePackages`:
 ```java
+@SpringBootApplication(scanBasePackages = {"com.example.service", "com.example.repository"})
+public class Application {
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+}
+```
+
+#### 4. `scanBasePackageClasses`:
+```java
 @SpringBootApplication(scanBasePackageClasses = MyComponent.class)
 public class Application {
     public static void main(String[] args) {
@@ -54,17 +64,18 @@ public class Application {
 }
 ```
 
-#### 4. `nameGenerator`:
+#### 5. `nameGenerator`:
 ```java
 @SpringBootApplication(nameGenerator = CustomBeanNameGenerator.class)
-public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+public class CustomBeanNameGenerator implements BeanNameGenerator {
+    @Override
+    public String generateBeanName(BeanDefinition definition, BeanDefinitionRegistry registry) {
+        return "custom_" + definition.getBeanClassName();
     }
 }
 ```
 
-#### 5. `proxyBeanMethods`:
+#### 6. `proxyBeanMethods`:
 ```java
 @SpringBootApplication(proxyBeanMethods = false)
 public class Application {
