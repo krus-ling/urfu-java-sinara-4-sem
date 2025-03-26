@@ -2,26 +2,28 @@ package ru.guk.education.service;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
 /**
  * <b>Реализация интерфейса (SMS)</b>
  * */
+@Log4j2
 @Component
 public class SmsService implements MessageService{
 
     @PostConstruct
     public void init() {
-        System.out.println("✅SmsService был создан");
+        log.info("✅SmsService был создан");
     }
 
     @PreDestroy
     public void destroy() {
-        System.out.println("💥SmsService был уничтожен");
+        log.info("💥SmsService был уничтожен");
     }
 
     @Override
     public void sendMessage(String message) {
-        System.out.println("\uD83D\uDCF1Отправка SMS: " + message);
+        log.info("\uD83D\uDCF1Отправка SMS: {}", message);
     }
 }
