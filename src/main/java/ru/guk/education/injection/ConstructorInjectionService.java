@@ -12,8 +12,8 @@ public class ConstructorInjectionService {
 
     private final MessageService messageService;
 
-    public ConstructorInjectionService(@Qualifier("emailService")MessageService messageService) {
-        this.messageService = messageService;
+    public ConstructorInjectionService(MessageService emailService) {
+        this.messageService = emailService;
     }
 
     public void process() {

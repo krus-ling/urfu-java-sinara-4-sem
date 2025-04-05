@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import ru.guk.education.injection.ConstructorInjectionService;
 import ru.guk.education.injection.FieldInjectionService;
 import ru.guk.education.injection.SetterInjectionService;
+import ru.guk.education.service.NotificationService;
 
 @SpringBootApplication
 public class EnvironmentApplication  implements CommandLineRunner {
@@ -13,14 +14,16 @@ public class EnvironmentApplication  implements CommandLineRunner {
     private final ConstructorInjectionService constructorService;
     private final FieldInjectionService fieldService;
     private final SetterInjectionService setterService;
+    public final NotificationService notificationService;
 
-    public EnvironmentApplication(ConstructorInjectionService constructorService,
-                                  FieldInjectionService fieldService,
-                                  SetterInjectionService setterService) {
-
+    public EnvironmentApplication(NotificationService notificationService,
+                                  SetterInjectionService setterService,
+                                  ConstructorInjectionService constructorService,
+                                  FieldInjectionService fieldService) {
+        this.notificationService = notificationService;
+        this.setterService = setterService;
         this.constructorService = constructorService;
         this.fieldService = fieldService;
-        this.setterService = setterService;
     }
 
 
@@ -30,6 +33,7 @@ public class EnvironmentApplication  implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        notificationService.notifyAllServices("Какое-то сообщение");
         constructorService.process();
         fieldService.process();
         setterService.process();

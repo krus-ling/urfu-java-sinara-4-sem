@@ -14,9 +14,8 @@ public class SetterInjectionService {
     private MessageService messageService;
 
     @Autowired
-    @Qualifier("emailService")
-    public void setMessageService(MessageService messageService) {
-        this.messageService = messageService;
+    public void setMessageService(MessageService smsService) {
+        this.messageService = smsService;
     }
 
     public void process() {

@@ -7,15 +7,17 @@ import ru.guk.education.service.MessageService;
 
 /**
  * <b>DI через поле</b>
- * */
+ */
 @Service
 public class FieldInjectionService {
 
-    @Autowired
-    @Qualifier("emailService")
-    private MessageService messageService;
+    private final MessageService emailService;
+
+    public FieldInjectionService(MessageService emailService) {
+        this.emailService = emailService;
+    }
 
     public void process() {
-        messageService.sendMessage("Сообщение через полевой DI");
+        emailService.sendMessage("Сообщение через полевой DI");
     }
 }
