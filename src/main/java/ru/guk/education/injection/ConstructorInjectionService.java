@@ -1,6 +1,6 @@
 package ru.guk.education.injection;
 
-import org.springframework.beans.factory.annotation.Qualifier;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.guk.education.service.MessageService;
 
@@ -8,15 +8,12 @@ import ru.guk.education.service.MessageService;
  * <b>DI через конструктор</b>
  * */
 @Service
+@RequiredArgsConstructor
 public class ConstructorInjectionService {
 
-    private final MessageService messageService;
-
-    public ConstructorInjectionService(MessageService emailService) {
-        this.messageService = emailService;
-    }
+    private final MessageService emailService;
 
     public void process() {
-        messageService.sendMessage("Сообщение через конструкторный DI");
+        emailService.sendMessage("Сообщение через конструкторный DI");
     }
 }
