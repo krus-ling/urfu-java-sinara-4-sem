@@ -15,7 +15,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<String> createUser(@RequestBody @Valid UserDTO userDTO) {
-        return ResponseEntity.ok("Пользователь принят: " + userDTO.getName());
+        return ResponseEntity.ok("Пользователь создан: name — " + userDTO.getName() + "username — " + userDTO.getUsername());
     }
 
 }
