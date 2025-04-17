@@ -9,4 +9,4 @@ my-config:
     - test2
     - test3
 
-envVar: ${EXAMPLE_TEST:default}
+envVar: myValue
