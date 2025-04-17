@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: spring-sinara-course
+
+my-config:
+  name: my-config-test
+  list:
+    - test1
+    - test2
+    - test3
+
+envVar: ${EXAMPLE_TEST:default}

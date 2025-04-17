@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: spring-sinara-course
+  profiles:
+    active: dev
+
+envVar: ${EXAMPLE_TEST:default}
