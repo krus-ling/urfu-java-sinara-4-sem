@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: spring-sinara-course
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: p4i5yuh
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
