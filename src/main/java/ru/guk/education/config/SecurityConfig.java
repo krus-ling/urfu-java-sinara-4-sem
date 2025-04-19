@@ -14,7 +14,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableMethodSecurity(prePostEnabled = true)
+@EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig {
 
     @Bean
@@ -49,8 +49,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(c -> c
                         .requestMatchers("/public/api/**").permitAll()
-                        .requestMatchers("/admin/api/**").hasAuthority("ADMIN")
-                        .requestMatchers("/support/api/**").hasAuthority("SUPPORT")
+                        .requestMatchers("/admin/api/**").hasRole("ADMIN")
+                        .requestMatchers("/support/api/**").hasRole("SUPPORT")
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
