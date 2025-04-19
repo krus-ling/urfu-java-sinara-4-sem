@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.guk.education.dto.TodoListDto;
-import ru.guk.education.entity.TodoList;
-import ru.guk.education.repository.TodoListRepository;
 import ru.guk.education.service.TodoListService;
 
 import java.util.List;

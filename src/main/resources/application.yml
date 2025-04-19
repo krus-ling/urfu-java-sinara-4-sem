@@ -3,8 +3,8 @@ spring:
     name: spring-sinara-course
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: p4i5yuh
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update
@@ -12,3 +12,9 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+logging:
+  level:
+    sql: debug
+    org.springframework.orm.jpa: DEBUG
+    org.springframework.transaction: DEBUG
