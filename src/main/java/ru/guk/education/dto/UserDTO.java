@@ -1,8 +1,12 @@
 package ru.guk.education.dto;
 
+import lombok.Getter;
+import lombok.Setter;
 import ru.guk.education.validation.ValidName;
 import ru.guk.education.validation.ValidUsername;
 
+@Setter
+@Getter
 public class UserDTO {
 
     @ValidName
@@ -10,21 +14,4 @@ public class UserDTO {
 
     @ValidUsername
     private String username;
-
-    // Геттеры и сеттеры
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 }
