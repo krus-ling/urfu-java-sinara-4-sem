@@ -2,20 +2,20 @@ package ru.guk.education.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.HashMap;
 import java.util.Map;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class CustomExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, String>> handleServerError(Exception ex) {
-        Map<String, String> response = new HashMap<>();
-        response.put("error", "Bad Gateway");
-        response.put("message", "Произошла ошибка на сервере🤯");
-        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(response);
+        return ResponseEntity
+                .status(HttpStatus.BAD_GATEWAY)
+                .body(Map.of(
+                "error", "Bad Gateway🤯",
+                        "message", ex.getMessage()));
     }
 }

@@ -1,28 +1,22 @@
 package ru.guk.education.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.web.bind.annotation.RequestMapping;
+import ru.guk.education.service.HeaderService;
 
 @Controller
+@RequiredArgsConstructor
+@RequestMapping("/headers")
 public class HeaderController {
 
-    @GetMapping("/headers")
+    private final HeaderService headerService;
+
+    @GetMapping()
     public String showHeaders(HttpServletRequest request, Model model) {
-        Map<String, String> headers = new HashMap<>();
-        Enumeration<String> headerNames = request.getHeaderNames();
-
-        while (headerNames.hasMoreElements()) {
-            String header = headerNames.nextElement();
-            headers.put(header, request.getHeader(header));
-        }
-
-        model.addAttribute("headers", headers);
-        return "headers";
+        return headerService.showHeaders(request, model);
     }
 }
