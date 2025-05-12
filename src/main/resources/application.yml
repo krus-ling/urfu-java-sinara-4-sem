@@ -1,0 +1,16 @@
+spring:
+  rabbitmq:
+    host: dog.lmq.cloudamqp.com
+    port: 5672
+    username: qusmruai
+    password: KAhOmoTKf1ZenteLD6BJ9-Y7YUyaZV-b
+    virtual-host: qusmruai
+    connection-timeout: 3000
+    requested-heartbeat: 30
+    cache-mode: CONNECTION
+
+
+app:
+  queue: queue
+  exchange: exchange
+  routing-key: routing
