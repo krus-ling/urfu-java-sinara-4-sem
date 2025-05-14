@@ -27,11 +27,9 @@ public class ConsumerConfig {
 
         var properties = kafkaProperties.buildConsumerProperties();
 
-        properties.put(org.apache.kafka.clients.consumer.ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class.getName());
+        var deserializer = new JsonDeserializer<>(MessageDTO.class, false);
+        deserializer.addTrustedPackages("ru.guk.education.dto");
 
-        var deserializer = new JsonDeserializer<>(MessageDTO.class);
-        deserializer.addTrustedPackages("*");
-        deserializer.setUseTypeMapperForKey(false);
 
         return new DefaultKafkaConsumerFactory<>(properties, new StringDeserializer(), deserializer);
     }
